@@ -1,4 +1,3 @@
-<!-- src/components/editor/Editor.vue -->
 <template>
   <BaseLayout>
     <template #header>
