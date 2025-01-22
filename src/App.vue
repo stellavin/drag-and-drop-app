@@ -1,85 +1,72 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div class="bg-custom-background min-h-screen font-roboto w-full flex flex-col">
+    <!-- Header -->
+    <header class="bg-header text-white flex items-center justify-between px-6 py-4 w-full">
+      <h1 class="text-xl">My App</h1>
+      <button class="bg-green-button text-white py-2 px-6 rounded hover:bg-green-600 transition">
+        Save
+      </button>
+    </header>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <!-- Main Content -->
+    <main class="flex w-full flex-1">
+      <!-- Left Column -->
+      <aside class="bg-left-column w-1/3 min-w-[250px] p-4 h-full">
+        <h2 class="text-white text-lg">Elements</h2>
+        <ul class="text-white mt-4 space-y-2">
+          <li>Element 1</li>
+          <li>Element 2</li>
+          <li>Element 3</li>
+        </ul>
+      </aside>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+      <!-- Right Column -->
+      <section class="flex-1 p-4 w-2/3 h-full">
+        <h2 class="text-gray-800 text-lg">Editing Area</h2>
+        <p class="mt-2 text-gray-600">This is where the editing content will go.</p>
+      </section>
+    </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script>
+export default {
+  name: 'App',
+}
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --custom-background: #faf7fa;
+  --header: #181819;
+  --green-button: #06c269;
+  --left-column: #2a2a2b; /* Fixed the color value */
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.bg-custom-background {
+  background-color: var(--custom-background);
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.bg-header {
+  background-color: var(--header);
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.bg-green-button {
+  background-color: var(--green-button);
+  transition: background-color 0.3s;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.bg-green-button:hover {
+  background-color: #04a759;
 }
 
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.bg-left-column {
+  background-color: var(--left-column);
 }
 </style>
