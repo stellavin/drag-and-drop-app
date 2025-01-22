@@ -9,7 +9,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex w-full flex-1">
+    <main class="flex w-full h-[calc(100vh-64px)]">
       <!-- Left Column -->
       <aside class="bg-left-column w-1/4 min-w-[250px] p-4 h-full">
         <h2 class="text-white text-lg">Elements</h2>
