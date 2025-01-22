@@ -1,4 +1,3 @@
-<!-- src/components/draggable/DraggableItem.vue -->
 <template>
   <div>
     <h3 class="text-white mb-2 text-sm">{{ title }}</h3>
