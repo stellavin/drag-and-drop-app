@@ -114,43 +114,40 @@
                   <div v-else-if="element.type === 'image'" class="mt-4">
                     <div class="grid grid-cols-4 gap-2">
                       <div
-                        v-for="index in 4"
-                        :key="index"
+                        v-for="(_, imageIndex) in 4"
+                        :key="imageIndex"
                         class="relative group cursor-pointer"
-                        @click="() => handleImageClick(index - 1, element)"
+                        @click="() => handleImageClick(imageIndex, element)"
                       >
                         <div
                           class="border rounded-lg p-2 hover:border-blue-500 transition-colors"
-                          :class="{ 'border-blue-500': element.imageIndex === index - 1 }"
+                          :class="{ 'border-blue-500': element.imageIndex === imageIndex }"
                         >
                           <div
                             class="h-16 w-16 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden"
                           >
                             <input
-                              type="url"
-                              v-if="element.isEditing === index - 1"
-                              v-model="element.images[index - 1]"
-                              class="absolute inset-0 z-10 p-2 bg-white border rounded-lg text-sm"
-                              placeholder="Enter image URL"
-                              @blur="element.isEditing = null"
-                              @keyup.enter="$event.target.blur()"
-                              ref="imageInput"
+                              :ref="(el) => setFileInputRef(el, element.id, imageIndex)"
+                              type="file"
+                              class="hidden"
+                              accept="image/*"
+                              @change="(e) => handleFileUpload(e, element, imageIndex)"
                             />
                             <img
-                              v-if="element.images[index - 1]"
-                              :src="element.images[index - 1]"
+                              v-if="element.images[imageIndex]"
+                              :src="element.images[imageIndex]"
                               class="w-full h-full object-cover"
-                              @error="handleImageError($event, element, index - 1)"
+                              @error="handleImageError($event, element, imageIndex)"
                             />
                             <ImageIcon v-else class="w-6 h-6 text-gray-400" />
                           </div>
                         </div>
                         <button
                           class="absolute top-2 right-2 p-1 bg-white rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity"
-                          @click.stop="element.isEditing = index - 1"
-                          title="Edit image URL"
+                          @click.stop="openFileInput(element.id, imageIndex)"
+                          title="Upload image"
                         >
-                          <Pencil class="w-4 h-4 text-gray-600" />
+                          <Upload class="w-4 h-4 text-gray-600" />
                         </button>
                       </div>
                     </div>
@@ -172,7 +169,7 @@
 <script>
 import { ref, nextTick } from 'vue'
 import draggable from 'vuedraggable'
-import { GripVertical, Copy, Trash2, Image as ImageIcon, Pencil } from 'lucide-vue-next'
+import { GripVertical, Copy, Trash2, Image as ImageIcon, Upload } from 'lucide-vue-next'
 
 export default {
   name: 'Editor',
@@ -182,11 +179,12 @@ export default {
     Copy,
     Trash2,
     ImageIcon,
-    Pencil,
+    Upload,
   },
   setup() {
     const blocks = ref([])
     const showDropIndicator = ref(false)
+    const fileInputRefs = ref({})
     const dropIndicatorStyle = ref({
       position: 'absolute',
       left: '1rem',
@@ -194,7 +192,13 @@ export default {
       height: '120px',
       transition: 'all 0.2s ease',
     })
-    const imageInput = ref(null)
+
+    const setFileInputRef = (el, blockId, imageIndex) => {
+      if (!fileInputRefs.value[blockId]) {
+        fileInputRefs.value[blockId] = {}
+      }
+      fileInputRefs.value[blockId][imageIndex] = el
+    }
 
     const dragStart = (event, type) => {
       event.dataTransfer.setData('blockType', type)
@@ -243,7 +247,6 @@ export default {
           content: blockType === 'text' ? 'Edit this text...' : '',
           images: blockType === 'image' ? ['', '', '', ''] : undefined,
           imageIndex: null,
-          isEditing: null,
         })
       }
     }
@@ -253,11 +256,30 @@ export default {
     }
 
     const handleImageError = (event, element, index) => {
-      // Reset the image URL if it's invalid
       element.images[index] = ''
     }
 
+    const handleFileUpload = (event, element, index) => {
+      const file = event.target.files[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          element.images[index] = e.target.result
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+
+    const openFileInput = (blockId, imageIndex) => {
+      const fileInput = fileInputRefs.value[blockId]?.[imageIndex]
+      if (fileInput) {
+        fileInput.click()
+      }
+    }
+
     const removeBlock = (index) => {
+      const blockId = blocks.value[index].id
+      delete fileInputRefs.value[blockId]
       blocks.value.splice(index, 1)
     }
 
@@ -283,16 +305,18 @@ export default {
       blocks,
       showDropIndicator,
       dropIndicatorStyle,
-      imageInput,
       dragStart,
       handleDragOver,
       handleDragLeave,
       handleDrop,
       handleImageClick,
       handleImageError,
+      handleFileUpload,
+      openFileInput,
       removeBlock,
       duplicateBlock,
       saveLayout,
+      setFileInputRef,
     }
   },
 }
