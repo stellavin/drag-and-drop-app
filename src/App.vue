@@ -11,7 +11,7 @@
     <!-- Main Content -->
     <main class="flex w-full flex-1">
       <!-- Left Column -->
-      <aside class="bg-left-column w-1/3 min-w-[250px] p-4 h-full">
+      <aside class="bg-left-column w-1/4 min-w-[250px] p-4 h-full">
         <h2 class="text-white text-lg">Elements</h2>
         <ul class="text-white mt-4 space-y-2">
           <li>Element 1</li>
