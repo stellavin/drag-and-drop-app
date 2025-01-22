@@ -2,7 +2,7 @@
   <div class="bg-custom-background min-h-screen font-roboto w-full flex flex-col">
     <!-- Header -->
     <header class="bg-header text-white flex items-center justify-between px-6 py-4 w-full">
-      <h1 class="text-xl">My App</h1>
+      <h1 class="text-xl"></h1>
       <button class="bg-green-button text-white py-2 px-6 rounded hover:bg-green-600 transition">
         Save
       </button>
@@ -11,19 +11,16 @@
     <!-- Main Content -->
     <main class="flex w-full h-[calc(100vh-64px)]">
       <!-- Left Column -->
-      <aside class="bg-left-column w-1/4 min-w-[250px] p-4 h-full">
-        <h2 class="text-white text-lg">Elements</h2>
-        <ul class="text-white mt-4 space-y-2">
-          <li>Element 1</li>
-          <li>Element 2</li>
-          <li>Element 3</li>
-        </ul>
+      <aside class="bg-left-column w-1/5 min-w-[250px] p-4 h-full">
+        <h2 class="text-white text-lg">Drag and Drop Elements</h2>
       </aside>
 
       <!-- Right Column -->
-      <section class="flex-1 p-4 w-2/3 h-full">
-        <h2 class="text-gray-800 text-lg">Editing Area</h2>
-        <p class="mt-2 text-gray-600">This is where the editing content will go.</p>
+      <section class="flex-1 p-4 flex items-center justify-center">
+        <div class="bg-white w-[90%] h-[90%] rounded-lg border border-[#EAECED]">
+          <h2 class="text-gray-800 text-lg p-4">Editing Area</h2>
+          <p class="px-4 text-gray-600">Drag and drop elements here</p>
+        </div>
       </section>
     </main>
   </div>
