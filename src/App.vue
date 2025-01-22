@@ -1,77 +1,34 @@
+<!-- src/App.vue -->
 <template>
-  <div class="bg-custom-background min-h-screen font-roboto w-full flex flex-col">
-    <!-- Header -->
-    <header class="bg-header text-white flex items-center justify-between px-6 py-4 w-full">
-      <h1 class="text-xl"></h1>
-      <button class="bg-green-button text-white py-2 px-6 rounded hover:bg-green-600 transition">
-        Save
-      </button>
-    </header>
-
-    <!-- Main Content -->
-    <main class="flex w-full h-[calc(100vh-64px)]">
-      <!-- Left Column -->
-      <aside class="bg-left-column w-1/5 min-w-[250px] p-4 h-full">
-        <h2 class="text-white text-lg">Drag and Drop Elements</h2>
-        <!-- Drag text -->
-        <div>
-          <h3>Text</h3>
-        </div>
-        <!-- Drag text -->
-        <div>
-          <h3>Image</h3>
-        </div>
-      </aside>
-
-      <!-- Right Column -->
-      <section class="flex-1 p-4 flex items-center justify-center">
-        <div class="bg-white w-[90%] h-[90%] rounded-lg border border-[#EAECED]">
-          <h2 class="text-gray-800 text-lg p-4">Editing Area</h2>
-          <p class="px-4 text-gray-600">Drag and drop elements here</p>
-        </div>
-      </section>
-    </main>
-  </div>
+  <Editor />
 </template>
 
 <script>
+import Editor from './components/editor/Editor.vue'
+
 export default {
   name: 'App',
+  components: {
+    Editor,
+  },
 }
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
+/* Base styles that need to be globally available */
 :root {
   --custom-background: #faf7fa;
   --header: #181819;
   --green-button: #06c269;
-  --left-column: #2a2a2b; /* Fixed the color value */
+  --left-column: #2a2a2b;
 }
 
-.font-roboto {
-  font-family: 'Roboto', sans-serif;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.bg-custom-background {
-  background-color: var(--custom-background);
-}
-
-.bg-header {
-  background-color: var(--header);
-}
-
-.bg-green-button {
-  background-color: var(--green-button);
-  transition: background-color 0.3s;
-}
-
-.bg-green-button:hover {
-  background-color: #04a759;
-}
-
-.bg-left-column {
-  background-color: var(--left-column);
+* {
+  box-sizing: border-box;
 }
 </style>
