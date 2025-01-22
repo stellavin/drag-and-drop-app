@@ -1,3 +1,4 @@
+<!-- src/components/editor/Editor.vue -->
 <template>
   <BaseLayout>
     <template #header>
@@ -32,7 +33,21 @@
         ></div>
 
         <draggable v-model="blocks" item-key="id" class="space-y-4" handle=".handle">
-          <template #item="{ element, index }"> </template>
+          <template #item="{ element, index }">
+            <TextBlock
+              v-if="element.type === 'text'"
+              v-model="element.content"
+              @duplicate="duplicateBlock(index)"
+              @remove="removeBlock(index)"
+            />
+            <ImageBlock
+              v-else-if="element.type === 'image'"
+              v-model="element.content"
+              :images="predefinedImages"
+              @duplicate="duplicateBlock(index)"
+              @remove="removeBlock(index)"
+            />
+          </template>
         </draggable>
 
         <p v-if="blocks.length === 0" class="text-gray-800 text-center">
@@ -49,6 +64,8 @@ import draggable from 'vuedraggable'
 import BaseLayout from '../layout/BaseLayout.vue'
 import Sidebar from '../sidebar/Sidebar.vue'
 import DraggableItem from '../draggable/DraggableItem.vue'
+import TextBlock from '../blocks/TextBlock.vue'
+import ImageBlock from '../blocks/ImageBlock.vue'
 
 export default {
   name: 'Editor',
@@ -56,12 +73,15 @@ export default {
     BaseLayout,
     Sidebar,
     DraggableItem,
+    draggable,
+    TextBlock,
+    ImageBlock,
   },
   setup() {
     const blocks = ref([])
     const showDropIndicator = ref(false)
     const blockTypes = [
-      { title: 'Text', type: 'text' },
+      { title: 'Text Block', type: 'text' },
       { title: 'Image Block', type: 'image' },
     ]
     const predefinedImages = [
