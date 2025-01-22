@@ -13,6 +13,14 @@
       <!-- Left Column -->
       <aside class="bg-left-column w-1/5 min-w-[250px] p-4 h-full">
         <h2 class="text-white text-lg">Drag and Drop Elements</h2>
+        <!-- Drag text -->
+        <div>
+          <h3>Text</h3>
+        </div>
+        <!-- Drag text -->
+        <div>
+          <h3>Image</h3>
+        </div>
       </aside>
 
       <!-- Right Column -->
