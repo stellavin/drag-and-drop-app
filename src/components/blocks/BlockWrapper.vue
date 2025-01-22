@@ -1,5 +1,6 @@
+<!-- src/components/blocks/BlockWrapper.vue -->
 <template>
-  <div class="border rounded p-4 relative">
+  <div class="draggable-block border rounded p-4 relative">
     <BlockControls
       class="absolute top-2 left-2"
       @duplicate="$emit('duplicate')"

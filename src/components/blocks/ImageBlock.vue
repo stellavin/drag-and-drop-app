@@ -9,7 +9,7 @@
           class="cursor-pointer border rounded p-2"
           :class="{ 'border-blue-500': modelValue === img }"
         >
-          <img :src="img" class="w-full h-32 object-cover" />
+          <img :src="img" class="w-full h-16 object-cover" />
         </div>
       </div>
       <img v-if="modelValue" :src="modelValue" class="max-w-full h-48 object-cover rounded" />

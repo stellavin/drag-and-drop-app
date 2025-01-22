@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between w-full mb-6">
+  <div class="flex justify-between w-full">
     <button class="handle cursor-move p-1 hover:bg-gray-100 rounded" title="Move">
       <GripVertical class="w-5 h-5 text-gray-800" />
     </button>
