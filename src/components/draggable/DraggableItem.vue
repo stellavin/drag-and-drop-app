@@ -1,10 +1,13 @@
 <template>
-  <div
-    class="bg-white p-2 rounded cursor-move text-gray-800"
-    draggable="true"
-    @dragstart="onDragStart"
-  >
+  <div>
     <h3>{{ title }}</h3>
+    <div
+      class="bg-white p-2 rounded cursor-move text-gray-800 text-sm"
+      draggable="true"
+      @dragstart="onDragStart"
+    >
+      <h3>{{ title }}</h3>
+    </div>
   </div>
 </template>
 
