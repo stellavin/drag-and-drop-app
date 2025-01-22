@@ -10,7 +10,14 @@
       </button>
     </template>
 
-    <Sidebar title="Drag and Drop Elements"> </Sidebar>
+    <Sidebar title="Drag and Drop Elements">
+      <DraggableItem
+        v-for="item in blockTypes"
+        :key="item.type"
+        :title="item.title"
+        :type="item.type"
+      />
+    </Sidebar>
 
     <section class="flex-1 p-4">
       <div
@@ -41,18 +48,20 @@ import { ref } from 'vue'
 import draggable from 'vuedraggable'
 import BaseLayout from '../layout/BaseLayout.vue'
 import Sidebar from '../sidebar/Sidebar.vue'
+import DraggableItem from '../draggable/DraggableItem.vue'
 
 export default {
   name: 'Editor',
   components: {
     BaseLayout,
     Sidebar,
+    DraggableItem,
   },
   setup() {
     const blocks = ref([])
     const showDropIndicator = ref(false)
     const blockTypes = [
-      { title: 'Text Block', type: 'text' },
+      { title: 'Text', type: 'text' },
       { title: 'Image Block', type: 'image' },
     ]
     const predefinedImages = [
